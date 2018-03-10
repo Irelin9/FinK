@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">FinK</string>
+
+    <!-- SIDE MENU -->
+    <string name="settings">Settings</string>
+    <string name="list">Categories</string>
+
+    <!-- ERRORS -->
+    <string name="error_load_data">Something went wrong. Don\'t try again((</string>
+
+    <!-- CURRENCY -->
+    <string name="usd">USD</string>
+    <string name="eur">EUR</string>
+    <string name="currency_format_string">1 %s = %s РУБ</string>
+</resources>
