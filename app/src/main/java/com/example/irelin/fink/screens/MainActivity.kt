@@ -25,6 +25,7 @@ class MainActivity : MainView, MvpAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        transaction_add.setOnClickListener({ addTransaction() })
     }
 
     override fun onTransactionsLoaded(items: List<Transaction>) {
@@ -46,7 +47,7 @@ class MainActivity : MainView, MvpAppCompatActivity() {
         startActivity(intent, options.toBundle())
     }
 
-    override fun showCourse(courses: Map<String, Currency>) {
+    override fun onCourseLoaded(courses: Map<String, Currency>) {
         if (!courses.isEmpty()) {
             val usd = getString(R.string.usd)
             val eur = getString(R.string.eur)
@@ -57,6 +58,10 @@ class MainActivity : MainView, MvpAppCompatActivity() {
 
     override fun showError() {
         Toast.makeText(this, R.string.error_load_data, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun addTransaction() {
+        presenter.addTransaction()
     }
 
     private fun formatCurrency(value: Double?) = String.format("%1$,.2f", value ?: 0f)

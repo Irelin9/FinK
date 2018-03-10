@@ -19,21 +19,22 @@ class MainPresenter : MvpPresenter<MainView>() {
 
     private var disposables = CompositeDisposable()
 
+    init {
+        Application.appComponent.inject(this)
+    }
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        Application.appComponent.inject(this)
-        loadList()
+        loadTransactions()
         loadCourse()
     }
 
-    private fun loadList() {
+    private fun loadTransactions() {
         val transactionsObservable = transactionsRepository.getTransactions()
         disposables.add(transactionsObservable
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { response -> viewState.onTransactionsLoaded(response) },
-                        { viewState.showError() }
+                        { thr -> viewState.showError(); thr.printStackTrace() }
                 ))
     }
 
@@ -43,9 +44,14 @@ class MainPresenter : MvpPresenter<MainView>() {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { response -> viewState.showCourse(response) },
+                        { response -> viewState.onCourseLoaded(response) },
                         { viewState.showError() }
                 ))
+    }
+
+    fun addTransaction() {
+        transactionsRepository.addTransaction()
+        loadTransactions()
     }
 
     override fun onDestroy() {

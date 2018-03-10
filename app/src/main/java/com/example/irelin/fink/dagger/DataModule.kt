@@ -14,16 +14,16 @@ import javax.inject.Singleton
 @Module
 class DataModule {
     @Provides
-    fun provideCourseRepository() : ICourseRepository = CourseRepository(provideRetrofit("https://www.cbr-xml-daily.ru/"))
+    fun provideCourseRepository(retrofit: Retrofit) : ICourseRepository = CourseRepository(retrofit)
 
     @Provides
     fun provideTransactionsRepository() : ITransactionsRepository = TransactionsRepository()
 
     @Provides
     @Singleton
-    fun provideRetrofit(baseUrl: String) : Retrofit = Retrofit.Builder()
+    fun provideRetrofit() : Retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .baseUrl(baseUrl)
+            .baseUrl("https://www.cbr-xml-daily.ru/")
             .build()
 }

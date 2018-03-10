@@ -15,7 +15,7 @@ interface MainView : MvpView {
 
     fun openDetails(name: String, itemView: View)
 
-    fun showCourse(courses: Map<String, Currency>)
+    fun onCourseLoaded(courses: Map<String, Currency>)
 
     fun showError()
 }

@@ -71,7 +71,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:id="@+id/transaction_add"
         app:layout_anchor="@id/main.appbar"
-        app:layout_anchorGravity="bottom|right|end" />
+        app:layout_anchorGravity="bottom|right|end"
+        android:src="@android:drawable/ic_input_add"/>
 </android.support.design.widget.CoordinatorLayout>
 
